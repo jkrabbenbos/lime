@@ -39,7 +39,7 @@ class SubmodularPick(object):
                         if method == 'full' then explanations will be generated for the
                         entire data. l
                 sample_size: The number of instances to explain if method == 'sample'
-                num_exps_desired: The number of explanation objects returned.
+                num_exps_desired: The number of explanation objects returned
                 num_features: maximum number of features present in explanation
 
 
@@ -59,6 +59,8 @@ class SubmodularPick(object):
                 sample_indices = all_indices[:sample_size]
             elif method == 'full':
                 sample_indices = np.arange(len(data))
+            else:
+                raise ValueError('Method must be \'sample\' or \'full\'')
 
             # Generate Explanations
             self.explanations = []
@@ -122,3 +124,4 @@ class SubmodularPick(object):
                 remaining_indices -= {best_ind}
 
             self.sp_explanations = [self.explanations[i] for i in V]
+            self.V = V
